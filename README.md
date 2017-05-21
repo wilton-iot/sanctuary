@@ -3132,7 +3132,7 @@ See also [`joinWith`](#joinWith).
 [Traversable]:              https://github.com/fantasyland/fantasy-land/tree/v3.0.0#traversable
 [UnaryType]:                https://github.com/sanctuary-js/sanctuary-def/tree/v0.10.1#UnaryType
 [`R.bind`]:                 http://ramdajs.com/docs/#bind
-[`R.invoker`]               http://ramdajs.com/docs/#invoker
+[`R.invoker`]:              http://ramdajs.com/docs/#invoker
 [`Z.alt`]:                  https://github.com/sanctuary-js/sanctuary-type-classes/tree/v4.0.0#alt
 [`Z.ap`]:                   https://github.com/sanctuary-js/sanctuary-type-classes/tree/v4.0.0#ap
 [`Z.apFirst`]:              https://github.com/sanctuary-js/sanctuary-type-classes/tree/v4.0.0#apFirst

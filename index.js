@@ -4309,7 +4309,7 @@
 //. [Traversable]:              v:fantasyland/fantasy-land#traversable
 //. [UnaryType]:                v:sanctuary-js/sanctuary-def#UnaryType
 //. [`R.bind`]:                 http://ramdajs.com/docs/#bind
-//. [`R.invoker`]               http://ramdajs.com/docs/#invoker
+//. [`R.invoker`]:              http://ramdajs.com/docs/#invoker
 //. [`Z.alt`]:                  v:sanctuary-js/sanctuary-type-classes#alt
 //. [`Z.ap`]:                   v:sanctuary-js/sanctuary-type-classes#ap
 //. [`Z.apFirst`]:              v:sanctuary-js/sanctuary-type-classes#apFirst
