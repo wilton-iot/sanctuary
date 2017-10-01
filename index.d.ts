@@ -338,8 +338,6 @@ export function curry5<A, B, C, D, E, F>(p: (q: A, r: B, s: C, t: D, u: E) => F)
 
 export function flip<A, B, C>(p: (q: A) => (r: B) => C): (s: B) => (t: A) => C;
 
-export function flip_<A, B, C>(p: (q: A, r: B) => C): (s: B) => (t: A) => C;
-
 //  Composition
 
 export function compose<A, B, C>(f: (b: B) => C): (g: (a: A) => B) => (x: A) => C;
@@ -348,8 +346,6 @@ export function compose<A, B, C>(f: (b: B) => C): (g: (a: A) => B) => (x: A) => 
 export function pipe<A>(fns: Array<(a: A) => A>): (x: A) => A;
 
 export function on<A, B, C>(p: (q: B) => (r: B) => C): (s: (t: A) => B) => (u: A) => (v: A) => C;
-
-export function on_<A, B, C>(p: (q: B, r: B) => C): (s: (t: A) => B) => (u: A) => (v: A) => C;
 
 //  TODO: Maybe
 
@@ -443,8 +439,6 @@ export function unfoldr<A, B>(f: (b: B) => Maybe<[A, B]>): (b: B) => Array<A>;
 export function range(start: Integer): (end: Integer) => Array<Integer>;
 
 export function groupBy<A>(eq: (x1: A) => (x2: A) => boolean): (xs: Array<A>) => Array<Array<A>>;
-
-export function groupBy_<A>(eq: (x1: A, x2: A) => boolean): (xs: Array<A>) => Array<Array<A>>;
 
 export function sort<A>(xs: Array<A>): Array<A>;
 

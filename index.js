@@ -110,10 +110,11 @@
 //. the `map` method takes an implicit argument `x` in addition to the explicit
 //. argument `y`. The type of the value upon which a method is invoked appears
 //. at the beginning of the signature, separated from the arguments and return
-//. value by a squiggly arrow (`~>`). The type of the `map` method of the Maybe
-//. type is written `Maybe a ~> (a -> b) -> Maybe b`. One could read this as:
+//. value by a squiggly arrow (`~>`). The type of the `fantasy-land/map` method
+//. of the Maybe type is written `Maybe a ~> (a -> b) -> Maybe b`. One could
+//. read this as:
 //.
-//. _When the `map` method is invoked on a value of type `Maybe a`
+//. _When the `fantasy-land/map` method is invoked on a value of type `Maybe a`
 //. (for any type `a`) with an argument of type `a -> b` (for any type `b`),
 //. it returns a value of type `Maybe b`._
 //.
@@ -1592,6 +1593,9 @@
   //.
   //. Returns Nothing.
   //.
+  //. It is idiomatic to use [`empty`](#empty) rather than use this function
+  //. directly.
+  //.
   //. ```javascript
   //. > S.empty(S.Maybe)
   //. Nothing
@@ -1602,6 +1606,9 @@
   //.
   //. Takes a value of any type and returns a Just with the given value.
   //.
+  //. It is idiomatic to use [`of`](#of) rather than use this function
+  //. directly.
+  //.
   //. ```javascript
   //. > S.of(S.Maybe, 42)
   //. Just(42)
@@ -1611,6 +1618,9 @@
   //# Maybe.fantasy-land/zero :: () -> Maybe a
   //.
   //. Returns Nothing.
+  //.
+  //. It is idiomatic to use [`zero`](#zero) rather than use this function
+  //. directly.
   //.
   //. ```javascript
   //. > S.zero(S.Maybe)
@@ -1682,6 +1692,9 @@
   //.   - `this` and `m` are both Justs, and their values are equal according
   //.     to [`Z.equals`][].
   //.
+  //. It is idiomatic to use [`equals`](#equals) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.equals(S.Nothing, S.Nothing)
   //. true
@@ -1708,6 +1721,9 @@
   //.
   //.   - `this` and `m` are both Justs and the value of `this` is less than
   //.     or equal to the value of `m` according to [`Z.lte`][].
+  //.
+  //. It is idiomatic to use [`lte`](#lte) or [`lte_`](#lte_) rather than use
+  //. this method directly.
   //.
   //. ```javascript
   //. > S.lte_(S.Nothing, S.Nothing)
@@ -1743,6 +1759,9 @@
   //.
   //. Otherwise, this method returns the Just.
   //.
+  //. It is idiomatic to use [`concat`](#concat) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.concat(S.Nothing, S.Nothing)
   //. Nothing
@@ -1768,6 +1787,9 @@
   //. it returns a Just whose value is the result of applying the function
   //. to this Just's value.
   //.
+  //. It is idiomatic to use [`map`](#map) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.map(Math.sqrt, S.Nothing)
   //. Nothing
@@ -1784,6 +1806,8 @@
   //. Takes a Maybe and returns Nothing unless `this` is a Just *and* the
   //. argument is a Just, in which case it returns a Just whose value is
   //. the result of applying the given Just's value to this Just's value.
+  //.
+  //. It is idiomatic to use [`ap`](#ap) rather than use this method directly.
   //.
   //. ```javascript
   //. > S.ap(S.Nothing, S.Nothing)
@@ -1807,6 +1831,9 @@
   //. Takes a function and returns `this` if `this` is Nothing; otherwise
   //. it returns the result of applying the function to this Just's value.
   //.
+  //. It is idiomatic to use [`chain`](#chain) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.chain(S.parseFloat, S.Nothing)
   //. Nothing
@@ -1825,6 +1852,9 @@
   //.
   //. Chooses between `this` and the other Maybe provided as an argument.
   //. Returns `this` if `this` is a Just; the other Maybe otherwise.
+  //.
+  //. It is idiomatic to use [`alt`](#alt) rather than use this method
+  //. directly.
   //.
   //. ```javascript
   //. > S.alt(S.Nothing, S.Nothing)
@@ -1852,11 +1882,14 @@
   //.   - the result of applying the function to the initial value and this
   //.     Just's value.
   //.
+  //. It is idiomatic to use [`reduce`](#reduce) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
-  //. > Z.reduce(Math.pow, 10, S.Nothing)
+  //. > S.reduce(S.curry2(Math.pow), 10, S.Nothing)
   //. 10
   //.
-  //. > Z.reduce(Math.pow, 10, S.Just(3))
+  //. > S.reduce(S.curry2(Math.pow), 10, S.Just(3))
   //. 1000
   //. ```
   Maybe.prototype['fantasy-land/reduce'] = function(f, x) {
@@ -1874,6 +1907,9 @@
   //.   - the result of mapping [`Just`](#Just) over the result of applying the
   //.     first function to this Just's value.
   //.
+  //. It is idiomatic to use [`traverse`](#traverse) rather than use this
+  //. method directly.
+  //.
   //. ```javascript
   //. > S.traverse(Array, S.words, S.Nothing)
   //. [Nothing]
@@ -1890,6 +1926,9 @@
   //. Takes a function and returns `this` if `this` is Nothing; otherwise
   //. it returns a Just whose value is the result of applying the function
   //. to `this`.
+  //.
+  //. It is idiomatic to use [`extend`](#extend) rather than use this method
+  //. directly.
   //.
   //. ```javascript
   //. > S.extend(x => x.value + 1, S.Nothing)
@@ -2235,6 +2274,9 @@
   //.
   //. Takes a value of any type and returns a Right with the given value.
   //.
+  //. It is idiomatic to use [`of`](#of) rather than use this function
+  //. directly.
+  //.
   //. ```javascript
   //. > S.of(S.Either, 42)
   //. Right(42)
@@ -2304,6 +2346,9 @@
   //.   - `this` and `e` are both Lefts or both Rights, and their values are
   //.     equal according to [`Z.equals`][].
   //.
+  //. It is idiomatic to use [`equals`](#equals) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.equals(S.Right([1, 2, 3]), S.Right([1, 2, 3]))
   //. true
@@ -2323,6 +2368,9 @@
   //.
   //.   - `this` and `e` are both Lefts or both Rights, and the value of `this`
   //.     is less than or equal to the value of `e` according to [`Z.lte`][].
+  //.
+  //. It is idiomatic to use [`lte`](#lte) or [`lte_`](#lte_) rather than use
+  //. this method directly.
   //.
   //. ```javascript
   //. > S.lte_(S.Left(10), S.Right(0))
@@ -2358,6 +2406,9 @@
   //.
   //. Otherwise, this method returns the Right.
   //.
+  //. It is idiomatic to use [`concat`](#concat) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.concat(S.Left('abc'), S.Left('def'))
   //. Left('abcdef')
@@ -2382,6 +2433,9 @@
   //. Takes a function and returns `this` if `this` is a Left; otherwise it
   //. returns a Right whose value is the result of applying the function to
   //. this Right's value.
+  //.
+  //. It is idiomatic to use [`map`](#map) rather than use this method
+  //. directly.
   //.
   //. See also [`Either#fantasy-land/bimap`][].
   //.
@@ -2409,6 +2463,9 @@
   //. Similar to [`Either#fantasy-land/map`][], but supports mapping over the
   //. left side as well as the right side.
   //.
+  //. It is idiomatic to use [`bimap`](#bimap) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
   //. > S.bimap(S.toUpper, S.add(1), S.Left('abc'))
   //. Left('ABC')
@@ -2425,6 +2482,8 @@
   //. Takes an Either and returns a Left unless `this` is a Right *and* the
   //. argument is a Right, in which case it returns a Right whose value is
   //. the result of applying the given Right's value to this Right's value.
+  //.
+  //. It is idiomatic to use [`ap`](#ap) rather than use this method directly.
   //.
   //. ```javascript
   //. > S.ap(S.Left('No such function'), S.Left('Cannot divide by zero'))
@@ -2447,6 +2506,9 @@
   //.
   //. Takes a function and returns `this` if `this` is a Left; otherwise
   //. it returns the result of applying the function to this Right's value.
+  //.
+  //. It is idiomatic to use [`chain`](#chain) rather than use this method
+  //. directly.
   //.
   //. ```javascript
   //. > global.sqrt = n =>
@@ -2471,6 +2533,9 @@
   //.
   //. Chooses between `this` and the other Either provided as an argument.
   //. Returns `this` if `this` is a Right; the other Either otherwise.
+  //.
+  //. It is idiomatic to use [`alt`](#alt) rather than use this method
+  //. directly.
   //.
   //. ```javascript
   //. > S.alt(S.Left('A'), S.Left('B'))
@@ -2498,11 +2563,14 @@
   //.   - the result of applying the function to the initial value and this
   //.     Right's value.
   //.
+  //. It is idiomatic to use [`reduce`](#reduce) rather than use this method
+  //. directly.
+  //.
   //. ```javascript
-  //. > Z.reduce(Math.pow, 10, S.Left('Cannot divide by zero'))
+  //. > S.reduce(S.curry2(Math.pow), 10, S.Left('Cannot divide by zero'))
   //. 10
   //.
-  //. > Z.reduce(Math.pow, 10, S.Right(3))
+  //. > S.reduce(S.curry2(Math.pow), 10, S.Right(3))
   //. 1000
   //. ```
   Either.prototype['fantasy-land/reduce'] = function(f, x) {
@@ -2520,6 +2588,9 @@
   //.   - the result of mapping [`Right`](#Right) over the result of applying
   //.     the first function to this Right's value.
   //.
+  //. It is idiomatic to use [`traverse`](#traverse) rather than use this
+  //. method directly.
+  //.
   //. ```javascript
   //. > S.traverse(Array, S.words, S.Left('Request failed'))
   //. [Left('Request failed')]
@@ -2536,6 +2607,9 @@
   //. Takes a function and returns `this` if `this` is a Left; otherwise it
   //. returns a Right whose value is the result of applying the function to
   //. `this`.
+  //.
+  //. It is idiomatic to use [`extend`](#extend) rather than use this method
+  //. directly.
   //.
   //. ```javascript
   //. > S.extend(x => x.value + 1, S.Left('Cannot divide by zero'))
@@ -3663,6 +3737,14 @@
   S.gets =
   def('gets', {}, [$.Predicate($.Any), $.Array($.String), a, $Maybe(b)], gets);
 
+  //. ### StrMap
+  //.
+  //. StrMap is an abbreviation of _string map_. A string map is an object,
+  //. such as `{foo: 1, bar: 2, baz: 3}`, whose values are all members of
+  //. the same type. Formally, a value is a member of type `StrMap a` if its
+  //. [type identifier][] is `'Object'` and the values of its enumerable own
+  //. properties are all members of type `a`.
+
   //# keys :: StrMap a -> Array String
   //.
   //. Returns the keys of the given string map, in arbitrary order.
@@ -3827,20 +3909,77 @@
       [f($.FiniteNumber), $.FiniteNumber],
       product);
 
-  //# div :: FiniteNumber -> NonZeroFiniteNumber -> FiniteNumber
+  //# div :: NonZeroFiniteNumber -> (FiniteNumber -> FiniteNumber)
+  //.
+  //. Takes a non-zero finite number `n` and returns the _divide by `n`_
+  //. function.
+  //.
+  //. See also [`div_`](#div_).
+  //.
+  //. ```javascript
+  //. > S.map(S.div(2), [0, 1, 2, 3])
+  //. [0, 0.5, 1, 1.5]
+  //. ```
+  S.div =
+  def('div',
+      {},
+      [$.NonZeroFiniteNumber, Fn($.FiniteNumber, $.FiniteNumber)],
+      flip$(div_));
+
+  //# div_ :: FiniteNumber -> NonZeroFiniteNumber -> FiniteNumber
   //.
   //. Returns the result of dividing its first argument (a finite number) by
   //. its second argument (a non-zero finite number).
   //.
+  //. See also [`div`](#div).
+  //.
   //. ```javascript
-  //. > S.div(7, 2)
+  //. > S.div_(7, 2)
   //. 3.5
+  //.
+  //. > S.map(S.div_(24), [1, 2, 3, 4])
+  //. [24, 12, 8, 6]
   //. ```
-  function div(x, y) {
+  function div_(x, y) {
     return x / y;
   }
-  S.div =
-  def('div', {}, [$.FiniteNumber, $.NonZeroFiniteNumber, $.FiniteNumber], div);
+  S.div_ =
+  def('div_',
+      {},
+      [$.FiniteNumber, $.NonZeroFiniteNumber, $.FiniteNumber],
+      div_);
+
+  //# pow :: FiniteNumber -> (FiniteNumber -> FiniteNumber)
+  //.
+  //. Takes a finite number `n` and returns the _power of `n`_ function.
+  //.
+  //. See also [`pow_`](#pow_).
+  //.
+  //. ```javascript
+  //. > S.map(S.pow(2), [-3, -2, -1, 0, 1, 2, 3])
+  //. [9, 4, 1, 0, 1, 4, 9]
+  //.
+  //. > S.map(S.pow(0.5), [1, 4, 9, 16, 25])
+  //. [1, 2, 3, 4, 5]
+  //. ```
+  S.pow =
+  def('pow',
+      {},
+      [$.FiniteNumber, Fn($.FiniteNumber, $.FiniteNumber)],
+      flip$(Math.pow));
+
+  //# pow_ :: FiniteNumber -> FiniteNumber -> FiniteNumber
+  //.
+  //. Curried version of [`Math.pow`][].
+  //.
+  //. See also [`pow`](#pow).
+  //.
+  //. ```javascript
+  //. > S.map(S.pow_(10), [-3, -2, -1, 0, 1, 2, 3])
+  //. [0.001, 0.01, 0.1, 1, 10, 100, 1000]
+  //. ```
+  S.pow_ =
+  def('pow_', {}, [$.FiniteNumber, $.FiniteNumber, $.FiniteNumber], Math.pow);
 
   //# mean :: Foldable f => f FiniteNumber -> Maybe FiniteNumber
   //.
@@ -4431,6 +4570,7 @@
 //. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid
 //. [Traversable]:      v:fantasyland/fantasy-land#traversable
 //. [UnaryType]:        v:sanctuary-js/sanctuary-def#UnaryType
+//. [`Math.pow`]:       https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
 //. [`Z.alt`]:          v:sanctuary-js/sanctuary-type-classes#alt
 //. [`Z.ap`]:           v:sanctuary-js/sanctuary-type-classes#ap
 //. [`Z.apFirst`]:      v:sanctuary-js/sanctuary-type-classes#apFirst
