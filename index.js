@@ -556,9 +556,7 @@
 
   //# lt :: Ord a => a -> (a -> Boolean)
   //.
-  //. Flipped version of [`Z.lt`][] intended for partial application.
-  //.
-  //. See also [`lt_`](#lt_).
+  //. Flipped version of [`Z.lt`][].
   //.
   //. ```javascript
   //. > S.filter(S.lt(3), [1, 2, 3, 4, 5])
@@ -566,29 +564,9 @@
   //. ```
   S.lt = def('lt', {a: [Z.Ord]}, [a, $.Predicate(a)], flip$(Z.lt));
 
-  //# lt_ :: Ord a => a -> a -> Boolean
-  //.
-  //. Curried version of [`Z.lt`][].
-  //.
-  //. See also [`lt`](#lt).
-  //.
-  //. ```javascript
-  //. > S.lt_([1, 2, 3], [1, 2, 3])
-  //. false
-  //.
-  //. > S.lt_([1, 2, 3], [1, 2, 4])
-  //. true
-  //.
-  //. > S.lt_([1, 2, 3], [1, 2])
-  //. false
-  //. ```
-  S.lt_ = def('lt_', {a: [Z.Ord]}, [a, a, $.Boolean], Z.lt);
-
   //# lte :: Ord a => a -> (a -> Boolean)
   //.
-  //. Flipped version of [`Z.lte`][] intended for partial application.
-  //.
-  //. See also [`lte_`](#lte_).
+  //. Flipped version of [`Z.lte`][].
   //.
   //. ```javascript
   //. > S.filter(S.lte(3), [1, 2, 3, 4, 5])
@@ -596,29 +574,9 @@
   //. ```
   S.lte = def('lte', {a: [Z.Ord]}, [a, $.Predicate(a)], flip$(Z.lte));
 
-  //# lte_ :: Ord a => a -> a -> Boolean
-  //.
-  //. Curried version of [`Z.lte`][].
-  //.
-  //. See also [`lte`](#lte).
-  //.
-  //. ```javascript
-  //. > S.lte_([1, 2, 3], [1, 2, 3])
-  //. true
-  //.
-  //. > S.lte_([1, 2, 3], [1, 2, 4])
-  //. true
-  //.
-  //. > S.lte_([1, 2, 3], [1, 2])
-  //. false
-  //. ```
-  S.lte_ = def('lte_', {a: [Z.Ord]}, [a, a, $.Boolean], Z.lte);
-
   //# gt :: Ord a => a -> (a -> Boolean)
   //.
-  //. Flipped version of [`Z.gt`][] intended for partial application.
-  //.
-  //. See also [`gt_`](#gt_).
+  //. Flipped version of [`Z.gt`][].
   //.
   //. ```javascript
   //. > S.filter(S.gt(3), [1, 2, 3, 4, 5])
@@ -626,53 +584,15 @@
   //. ```
   S.gt = def('gt', {a: [Z.Ord]}, [a, $.Predicate(a)], flip$(Z.gt));
 
-  //# gt_ :: Ord a => a -> a -> Boolean
-  //.
-  //. Curried version of [`Z.gt`][].
-  //.
-  //. See also [`gt`](#gt).
-  //.
-  //. ```javascript
-  //. > S.gt_([1, 2, 3], [1, 2, 3])
-  //. false
-  //.
-  //. > S.gt_([1, 2, 3], [1, 2, 4])
-  //. false
-  //.
-  //. > S.gt_([1, 2, 3], [1, 2])
-  //. true
-  //. ```
-  S.gt_ = def('gt_', {a: [Z.Ord]}, [a, a, $.Boolean], Z.gt);
-
   //# gte :: Ord a => a -> (a -> Boolean)
   //.
-  //. Flipped version of [`Z.gte`][] intended for partial application.
-  //.
-  //. See also [`gte_`](#gte_).
+  //. Flipped version of [`Z.gte`][].
   //.
   //. ```javascript
   //. > S.filter(S.gte(3), [1, 2, 3, 4, 5])
   //. [3, 4, 5]
   //. ```
   S.gte = def('gte', {a: [Z.Ord]}, [a, $.Predicate(a)], flip$(Z.gte));
-
-  //# gte_ :: Ord a => a -> a -> Boolean
-  //.
-  //. Curried version of [`Z.gte`][].
-  //.
-  //. See also [`gte`](#gte).
-  //.
-  //. ```javascript
-  //. > S.gte_([1, 2, 3], [1, 2, 3])
-  //. true
-  //.
-  //. > S.gte_([1, 2, 3], [1, 2, 4])
-  //. false
-  //.
-  //. > S.gte_([1, 2, 3], [1, 2])
-  //. true
-  //. ```
-  S.gte_ = def('gte_', {a: [Z.Ord]}, [a, a, $.Boolean], Z.gte);
 
   //# min :: Ord a => a -> a -> a
   //.
@@ -1310,24 +1230,6 @@
   }
   S.K = def('K', {}, [a, b, a], K);
 
-  //# A :: (a -> b) -> a -> b
-  //.
-  //. The A combinator. Takes a function and a value, and returns the result
-  //. of applying the function to the value. Equivalent to Haskell's `($)`
-  //. function.
-  //.
-  //. ```javascript
-  //. > S.A(S.add(1), 42)
-  //. 43
-  //.
-  //. > S.map(S.A(S.__, 100), [S.add(1), Math.sqrt])
-  //. [101, 10]
-  //. ```
-  function A(f, x) {
-    return f(x);
-  }
-  S.A = def('A', {}, [Fn(a, b), a, b], A);
-
   //# T :: a -> (a -> b) -> b
   //.
   //. The T ([thrush][]) combinator. Takes a value and a function, and returns
@@ -1722,23 +1624,20 @@
   //.   - `this` and `m` are both Justs and the value of `this` is less than
   //.     or equal to the value of `m` according to [`Z.lte`][].
   //.
-  //. It is idiomatic to use [`lte`](#lte) or [`lte_`](#lte_) rather than use
-  //. this method directly.
+  //. It is idiomatic to use [`lte`](#lte) rather than use this method
+  //. directly.
   //.
   //. ```javascript
-  //. > S.lte_(S.Nothing, S.Nothing)
+  //. > S.lte(S.Just(1))(S.Nothing)
   //. true
   //.
-  //. > S.lte_(S.Nothing, S.Just(0))
+  //. > S.lte(S.Just(1))(S.Just(0))
   //. true
   //.
-  //. > S.lte_(S.Just(0), S.Nothing)
-  //. false
-  //.
-  //. > S.lte_(S.Just(0), S.Just(1))
+  //. > S.lte(S.Just(1))(S.Just(1))
   //. true
   //.
-  //. > S.lte_(S.Just(1), S.Just(0))
+  //. > S.lte(S.Just(1))(S.Just(2))
   //. false
   //. ```
   function Maybe$prototype$lte(other) {
@@ -2369,20 +2268,20 @@
   //.   - `this` and `e` are both Lefts or both Rights, and the value of `this`
   //.     is less than or equal to the value of `e` according to [`Z.lte`][].
   //.
-  //. It is idiomatic to use [`lte`](#lte) or [`lte_`](#lte_) rather than use
-  //. this method directly.
+  //. It is idiomatic to use [`lte`](#lte) rather than use this method
+  //. directly.
   //.
   //. ```javascript
-  //. > S.lte_(S.Left(10), S.Right(0))
+  //. > S.lte(S.Right(1))(S.Left(99))
   //. true
   //.
-  //. > S.lte_(S.Right(0), S.Left(10))
-  //. false
-  //.
-  //. > S.lte_(S.Right(0), S.Right(1))
+  //. > S.lte(S.Right(1))(S.Right(0))
   //. true
   //.
-  //. > S.lte_(S.Right(1), S.Right(0))
+  //. > S.lte(S.Right(1))(S.Right(1))
+  //. true
+  //.
+  //. > S.lte(S.Right(0))(S.Right(2))
   //. false
   //. ```
   function Either$prototype$lte(other) {
@@ -3841,33 +3740,15 @@
   //.
   //. Takes a finite number `n` and returns the _subtract `n`_ function.
   //.
-  //. See also [`sub_`](#sub_).
-  //.
   //. ```javascript
   //. > S.map(S.sub(1), [1, 2, 3])
   //. [0, 1, 2]
   //. ```
-  S.sub =
-  def('sub',
-      {},
-      [$.FiniteNumber, Fn($.FiniteNumber, $.FiniteNumber)],
-      flip$(sub_));
-
-  //# sub_ :: FiniteNumber -> FiniteNumber -> FiniteNumber
-  //.
-  //. Returns the difference between two (finite) numbers.
-  //.
-  //. See also [`sub`](#sub).
-  //.
-  //. ```javascript
-  //. > S.sub_(4, 2)
-  //. 2
-  //. ```
-  function sub_(x, y) {
-    return x - y;
+  function sub(x, y) {
+    return y - x;
   }
-  S.sub_ =
-  def('sub_', {}, [$.FiniteNumber, $.FiniteNumber, $.FiniteNumber], sub_);
+  S.sub =
+  def('sub', {}, [$.FiniteNumber, $.FiniteNumber, $.FiniteNumber], sub);
 
   //# mult :: FiniteNumber -> FiniteNumber -> FiniteNumber
   //.
@@ -3914,46 +3795,19 @@
   //. Takes a non-zero finite number `n` and returns the _divide by `n`_
   //. function.
   //.
-  //. See also [`div_`](#div_).
-  //.
   //. ```javascript
   //. > S.map(S.div(2), [0, 1, 2, 3])
   //. [0, 0.5, 1, 1.5]
   //. ```
-  S.div =
-  def('div',
-      {},
-      [$.NonZeroFiniteNumber, Fn($.FiniteNumber, $.FiniteNumber)],
-      flip$(div_));
-
-  //# div_ :: FiniteNumber -> NonZeroFiniteNumber -> FiniteNumber
-  //.
-  //. Returns the result of dividing its first argument (a finite number) by
-  //. its second argument (a non-zero finite number).
-  //.
-  //. See also [`div`](#div).
-  //.
-  //. ```javascript
-  //. > S.div_(7, 2)
-  //. 3.5
-  //.
-  //. > S.map(S.div_(24), [1, 2, 3, 4])
-  //. [24, 12, 8, 6]
-  //. ```
-  function div_(x, y) {
-    return x / y;
+  function div(x, y) {
+    return y / x;
   }
-  S.div_ =
-  def('div_',
-      {},
-      [$.FiniteNumber, $.NonZeroFiniteNumber, $.FiniteNumber],
-      div_);
+  S.div =
+  def('div', {}, [$.NonZeroFiniteNumber, $.FiniteNumber, $.FiniteNumber], div);
 
   //# pow :: FiniteNumber -> (FiniteNumber -> FiniteNumber)
   //.
   //. Takes a finite number `n` and returns the _power of `n`_ function.
-  //.
-  //. See also [`pow_`](#pow_).
   //.
   //. ```javascript
   //. > S.map(S.pow(2), [-3, -2, -1, 0, 1, 2, 3])
@@ -3967,19 +3821,6 @@
       {},
       [$.FiniteNumber, Fn($.FiniteNumber, $.FiniteNumber)],
       flip$(Math.pow));
-
-  //# pow_ :: FiniteNumber -> FiniteNumber -> FiniteNumber
-  //.
-  //. Curried version of [`Math.pow`][].
-  //.
-  //. See also [`pow`](#pow).
-  //.
-  //. ```javascript
-  //. > S.map(S.pow_(10), [-3, -2, -1, 0, 1, 2, 3])
-  //. [0.001, 0.01, 0.1, 1, 10, 100, 1000]
-  //. ```
-  S.pow_ =
-  def('pow_', {}, [$.FiniteNumber, $.FiniteNumber, $.FiniteNumber], Math.pow);
 
   //# mean :: Foldable f => f FiniteNumber -> Maybe FiniteNumber
   //.
@@ -4570,7 +4411,6 @@
 //. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid
 //. [Traversable]:      v:fantasyland/fantasy-land#traversable
 //. [UnaryType]:        v:sanctuary-js/sanctuary-def#UnaryType
-//. [`Math.pow`]:       https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
 //. [`Z.alt`]:          v:sanctuary-js/sanctuary-type-classes#alt
 //. [`Z.ap`]:           v:sanctuary-js/sanctuary-type-classes#ap
 //. [`Z.apFirst`]:      v:sanctuary-js/sanctuary-type-classes#apFirst
