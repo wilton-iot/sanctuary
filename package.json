@@ -41,7 +41,8 @@
       "test",
       "CONTRIBUTING.md",
       "circle.yml",
-      "karma.conf.js"
+      "karma.conf.js",
+      "test.js"
     ]
   }
 }

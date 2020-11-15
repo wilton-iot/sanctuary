@@ -1,4 +1,8 @@
-//  sanctuary@3.1.0 with bundled dependencies:
+define([], function() {
+    var defineOrig = define;
+    define = null;
+    var self = {};
+//  //  sanctuary@3.1.0 with bundled dependencies:
 //
 //  - sanctuary-show@2.0.0
 //  - sanctuary-type-identifiers@3.0.0
@@ -12148,3 +12152,8 @@
 //. [type identifier]:          v:sanctuary-js/sanctuary-type-identifiers
 //. [type representative]:      v:fantasyland/fantasy-land#type-representatives
 //. [variadic functions]:       https://en.wikipedia.org/wiki/Variadic_function
+
+define = defineOrig;
+return self;
+
+});
